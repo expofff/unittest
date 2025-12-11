@@ -2,12 +2,12 @@ name: Geometry Unit Tests CI/CD
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, lab4-unit-tests, lab5-ci-cd ]
   pull_request:
     branches: [ main, master ]
 
 jobs:
-  unit-tests:
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -22,50 +22,16 @@ jobs:
       with:
         python-version: '3.9'
     
-    - name: Run unit tests for circle
+    - name: Run unit tests
       run: |
-        echo "=========================================="
-        echo "Запуск unit-тестов для circle.py"
-        echo "=========================================="
-        python3 -m unittest circle.py -v
-        echo "Тесты для circle.py пройдены успешно!"
-        echo ""
-    
-    - name: Run unit tests for square
-      run: |
-        echo "=========================================="
-        echo "Запуск unit-тестов для square.py"
-        echo "=========================================="
-        python3 -m unittest square.py -v
-        echo "Тесты для square.py пройдены успешно!"
-        echo ""
-    
-    - name: Run unit tests for rectangle
-      run: |
-        echo "=========================================="
-        echo "Запуск unit-тестов для rectangle.py"
-        echo "=========================================="
-        python3 -m unittest rectangle.py -v
-        echo "Тесты для rectangle.py пройдены успешно!"
-        echo ""
-    
-    - name: Run unit tests for triangle
-      run: |
-        echo "=========================================="
-        echo "Запуск unit-тестов для triangle.py"
-        echo "=========================================="
-        python3 -m unittest triangle.py -v
-        echo "Тесты для triangle.py пройдены успешно!"
-        echo ""
-    
-    - name: Test summary
-      run: |
-        echo "=========================================="
-        echo "Сводка по выполнению тестов"
-        echo "=========================================="
-        echo "Операционная система: ${{ runner.os }}"
-        echo "Все unit-тесты успешно пройдены!"
-        echo "Тестирование завершено на платформах:"
-        echo "  - Ubuntu Latest"
-        echo "  - Windows Latest"
-        echo "=========================================="
+        echo "=== Запуск всех unit-тестов ==="
+        
+        for test_file in circle.py square.py rectangle.py triangle.py; do
+          echo "Тестирование: $test_file"
+          echo "------------------------------------------"
+          python3 -m unittest "$test_file" -v || exit 1
+          echo "$test_file: УСПЕХ"
+          echo ""
+        done
+        
+        echo "🎉 ВСЕ ТЕСТЫ УСПЕШНО ПРОЙДЕНЫ!"
