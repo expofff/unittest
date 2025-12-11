@@ -73,3 +73,6 @@ class SquareTestCase(unittest.TestCase):
     def test_perimeter_small_number(self):
         """Тест периметра с маленьким числом"""
         self.assertAlmostEqual(perimeter(0.1), 0.4)
+
+if __name__ == "__main__":
+    unittest.main()

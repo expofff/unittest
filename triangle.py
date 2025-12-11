@@ -89,3 +89,6 @@ class TriangleTestCase(unittest.TestCase):
         """Тест периметра равнобедренного треугольника"""
         self.assertEqual(perimeter(5, 5, 3), 13)
         self.assertEqual(perimeter(4, 6, 6), 16)
+        
+if __name__ == "__main__":
+    unittest.main()

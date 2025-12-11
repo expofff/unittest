@@ -81,3 +81,6 @@ class RectangleTestCase(unittest.TestCase):
     def test_perimeter_small_numbers(self):
         """Тест периметра с маленькими числами"""
         self.assertAlmostEqual(perimeter(0.1, 0.2), 0.6)
+
+if __name__ == "__main__":
+    unittest.main()

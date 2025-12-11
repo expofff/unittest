@@ -1,0 +1,71 @@
+name: Geometry Unit Tests CI/CD
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  unit-tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Run unit tests for circle
+      run: |
+        echo "=========================================="
+        echo "Запуск unit-тестов для circle.py"
+        echo "=========================================="
+        python3 -m unittest circle.py -v
+        echo "Тесты для circle.py пройдены успешно!"
+        echo ""
+    
+    - name: Run unit tests for square
+      run: |
+        echo "=========================================="
+        echo "Запуск unit-тестов для square.py"
+        echo "=========================================="
+        python3 -m unittest square.py -v
+        echo "Тесты для square.py пройдены успешно!"
+        echo ""
+    
+    - name: Run unit tests for rectangle
+      run: |
+        echo "=========================================="
+        echo "Запуск unit-тестов для rectangle.py"
+        echo "=========================================="
+        python3 -m unittest rectangle.py -v
+        echo "Тесты для rectangle.py пройдены успешно!"
+        echo ""
+    
+    - name: Run unit tests for triangle
+      run: |
+        echo "=========================================="
+        echo "Запуск unit-тестов для triangle.py"
+        echo "=========================================="
+        python3 -m unittest triangle.py -v
+        echo "Тесты для triangle.py пройдены успешно!"
+        echo ""
+    
+    - name: Test summary
+      run: |
+        echo "=========================================="
+        echo "Сводка по выполнению тестов"
+        echo "=========================================="
+        echo "Операционная система: ${{ runner.os }}"
+        echo "Все unit-тесты успешно пройдены!"
+        echo "Тестирование завершено на платформах:"
+        echo "  - Ubuntu Latest"
+        echo "  - Windows Latest"
+        echo "=========================================="

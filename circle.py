@@ -70,3 +70,6 @@ class CircleTestCase(unittest.TestCase):
     def test_perimeter_small_number(self):
         """Тест периметра с маленьким радиусом"""
         self.assertAlmostEqual(perimeter(0.1), 2 * math.pi * 0.1)
+
+if __name__ == "__main__":
+    unittest.main()
