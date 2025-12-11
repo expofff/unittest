@@ -23,6 +23,7 @@ jobs:
         python-version: '3.9'
     
     - name: Run unit tests
+      shell: bash
       run: |
         echo "=== Запуск всех unit-тестов ==="
         
